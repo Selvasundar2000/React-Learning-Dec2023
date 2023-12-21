@@ -8,7 +8,7 @@ import Roles from './JobRole';
 
 function Card() {
 
-    const content = "This is my react project”"
+    const content = "This is my react projects”"
 
     return (
         <div>
