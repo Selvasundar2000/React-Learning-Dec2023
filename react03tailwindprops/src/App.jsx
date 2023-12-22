@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-3xl bg-green-500 p-3 rounded-md'>
+      <h1 className='text-3xl bg-red-500 p-3 rounded-md'>
        Employee details</h1>
       <Card />
     </>

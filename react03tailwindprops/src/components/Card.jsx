@@ -13,7 +13,7 @@ function Card() {
     return (
         <div>
             {Roles.map((item, index) => {
-                return <figure className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
+                return <figure className="md:flex bg-slate-300 rounded-xl p-8 md:p-0 dark:bg-slate-800">
                     <img class="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src={img1}
                         alt="" width="384" height="512" />
                     <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
@@ -29,9 +29,10 @@ function Card() {
                             <div className="text-slate-700 dark:text-slate-500">
                                 {item.description}
                             </div>
-                        </figcaption>
-                    </div>
+                        </figcaption>                        
+                    </div>                    
                 </figure>
+                
             })}
         </div>
     )
