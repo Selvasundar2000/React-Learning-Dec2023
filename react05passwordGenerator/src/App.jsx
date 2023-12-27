@@ -19,7 +19,7 @@ function App() {
     if (charAllow) str += "!@#$%^&*()_+"
 
     for (let i = 1; i < len; i++) {
-      const char = Math.floor(Math.random() * str.length + 1)
+      const char = Math.floor(Math.random() * str.length)
       pass += str.charAt(char)
     }
 
@@ -31,9 +31,6 @@ function App() {
     window.navigator.clipboard.writeText(pwd)
     pwdRef.current.select()
   }
-
-
-
 
   useEffect(() => {
     genPwd()
@@ -77,8 +74,9 @@ function App() {
           <input
             type="checkbox"
             defaultChecked={numAllow}
-            onChange={() => {
+            onChange={() => {              
               setnumAllow((prev) => !prev)
+
             }}
             name=""
             id=""
@@ -101,6 +99,9 @@ function App() {
 
   )
 }
+
+
+
 
 export default App
 
