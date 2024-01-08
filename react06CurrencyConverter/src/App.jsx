@@ -22,7 +22,7 @@ const swap=()=>{
 }
 
 const convert=()=>{
-  setConvertedAmount(amount* currencyInfo[to])
+  setConvertedAmount(amount* currencyInfo[to])// calculation money conversion
 
 }
 
@@ -41,10 +41,10 @@ const convert=()=>{
             <div className='w-full mb-1'>
              <InputBox
              label="from"
-             amount={amount}
-             currencyOptions={options}
-             onCurrencyChange={(currency)=>setFrom(currency)}
-             onAmountChange={(amount)=>setAmount(amount)}
+             amount={amount.toFixed(2)} // Amouht swap 
+             currencyOptions={options} // drop down currency option enabled
+             onCurrencyChange={(currency)=>setFrom(currency)} // Allow Drop down currency can be changed
+             onAmountChange={(amount)=>setAmount(amount)} // Allow text box currency can be changed
              selectedCurrency={from}
              />
             </div>
@@ -55,8 +55,7 @@ const convert=()=>{
               onClick={swap}>
                 Swap
               </button>
-            </div>
-           
+            </div>           
             <div className='w-full mb-1'>
              <InputBox
             label="to"
