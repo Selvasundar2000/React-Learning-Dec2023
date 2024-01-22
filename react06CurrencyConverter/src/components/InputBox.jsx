@@ -28,7 +28,7 @@ function InputBox({
                     placeholder='Amount'
                     disabled={amountDisabled}
                     value={amount}
-                    onChange={(e) =>  onAmountChange(Number(e.target.value))}
+                    onChange={(e) =>  onAmountChange(Number(e.target.value))} // input value swap
                 />
             </div>
             <div className='w-1/2 flex flex-wrap justify-end text-right'>
@@ -37,7 +37,7 @@ function InputBox({
                 <select
                     value={selectedCurrency}
                     className='rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none'
-                    onChange={(e) =>  onCurrencyChange(e.target.value)}
+                    onChange={(e) =>  onCurrencyChange(e.target.value)} //drop down value swap
 
                     disabled={currencyDisabled} >
 

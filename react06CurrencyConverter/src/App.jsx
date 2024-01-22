@@ -10,20 +10,18 @@ function App() {
   const [from, setFrom] = useState('usd')
   const [to,setTo]=useState('inr')
   const [convertedAmount, setConvertedAmount] = useState(0)
-
-const currencyInfo=useCurrencyInfo(from)
-const options=Object.keys(currencyInfo)
+  const currencyInfo=useCurrencyInfo(from)
+  const options=Object.keys(currencyInfo)
 
 const swap=()=>{
   setFrom(to)
   setTo(from)
-  setConvertedAmount(amount)
+ // setConvertedAmount(amount)
   setAmount(convertedAmount)
 }
 
 const convert=()=>{
   setConvertedAmount(amount* currencyInfo[to])// calculation money conversion
-
 }
 
   return (
@@ -35,16 +33,16 @@ const convert=()=>{
         <div className='w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30'>
     
     <form onSubmit={(e)=>{
-            e.preventDefault()
+            e.preventDefault() // prevant after submit button to loading
             convert()
           }}>
             <div className='w-full mb-1'>
              <InputBox
-             label="from"
-             amount={amount.toFixed(2)} // Amouht swap 
-             currencyOptions={options} // drop down currency option enabled
-             onCurrencyChange={(currency)=>setFrom(currency)} // Allow Drop down currency can be changed
-             onAmountChange={(amount)=>setAmount(amount)} // Allow text box currency can be changed
+             label="from"            
+            amount={amount.toFixed(2)} // value of amount
+             currencyOptions={options} //get value from drop down control
+             onCurrencyChange={(currency)=>setFrom(currency)} // Allow Drop down currency can be swap
+             onAmountChange={(amount)=>setAmount(amount)} // Allow input box currency can be swap
              selectedCurrency={from}
              />
             </div>
@@ -52,7 +50,7 @@ const convert=()=>{
               <button
               className='absolute left-1/2 -translate-x-1/2 -translate-y-1/2
               border-2 border-white rounded-md bg-green-600 text-white px-2 py-0.5'
-              onClick={swap}>
+              onClick={swap}>               
                 Swap
               </button>
             </div>           
@@ -60,7 +58,7 @@ const convert=()=>{
              <InputBox
             label="to"
             currencyOptions={options}
-            amount={convertedAmount.toFixed(2)}
+            amount={convertedAmount.toFixed(2)}          
             onCurrencyChange={(currency)=>setTo(currency)}
             selectedCurrency={to}
             amountDisabled
@@ -79,3 +77,6 @@ const convert=()=>{
 }
 
 export default App
+
+
+

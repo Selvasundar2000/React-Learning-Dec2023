@@ -1,0 +1,134 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <style>
+        .groove {border-style: groove;}
+    </style>
+</head>
+<body>
+    <div style="margin: 200px;">
+        <div id="Month"></div>
+        <div id="Year"></div>
+        <button id="btnBackward" onclick="AddDate('Prev');"><</button>
+        <button id="btnForward" onclick="AddDate('Next');">></button>
+        <table id="TableCalender" style="border: 1px solid;" class="groove">
+        </table>
+
+    </div>
+</body>
+</html>
+
+
+
+<script>
+    var btnForward = document.getElementById("btnForward");
+    var btnBackward = document.getElementById("btnBackward");
+
+    var value,a,b;
+    function startOfMonth(date) {
+
+        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+
+    }
+
+    //var dt = new Date();
+    var DayName = [];
+    DayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var Month = [];
+    Month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let arr = [], result = [];
+    let Increase = [0];
+
+    AddDate('');
+
+    function AddDate(x) {
+
+        var date = [];
+        date = new Date();
+
+        var CurrentDate = new Date().getDate();
+        var CurrentMonth = new Date().getMonth();
+        var CurrentYear = new Date().getFullYear();
+
+        //---------
+        value = parseInt(Increase, 0);
+        value = isNaN(value) ? 1 : value;
+
+        if (x == 'Prev') {
+            value--;
+        } else if (x == 'Next') {
+            value++;
+        }
+
+        Increase = value;
+        var Cyr = date.getFullYear();//Current Year        
+        date.setFullYear(Cyr, Increase, 1);
+        //----------
+        var y = date.getFullYear();
+        var m = date.getMonth();
+        var start = 1;
+        var Fstart = startOfMonth(date).toString();// Start day of the month     
+        var end = new Date(y, m + 1, 0).getDate();
+        //var FEnd = startOfMonth(end).tostring();// End day of the month
+        var lastDay = new Date(y, m + 1, 0);
+        function BtwDays(start, end) {
+            return Array.from({ length: end - start + 1 },
+                (_, index) => start + index);
+        }
+        var DayNum = BtwDays(start, end);
+        var tr = "<tr>";
+        var trs = "</tr>";
+        var td = [];
+        var ctd = [];
+        ctd = ["<td style='border: 1px solid;' bgcolor='yellow'>"];
+        td = ["<td style='border: 1px solid'>"];
+        var tds = "</td>";
+        var th = "<th style='border: 1px solid'>";
+        var ths = "</th>";
+
+        var weekLimit = 7, cells = 0;
+        DayName.forEach((value) => {
+            tr += th + value + ths;//--->Weekdays bind
+            cells++;
+
+        });
+        tr += trs;
+
+
+        DayNum.forEach((value) => {
+
+            if (value == 1) {
+                for (let i = 0; i < Fstart; i++) {
+                    tr += td[0];
+                }
+                tr += td + value + tds;
+                cells += Fstart;
+
+            } else if (value => 1) {
+                if (value == CurrentDate && CurrentMonth == m && CurrentYear == y) {
+                    tr += ctd + value + tds;
+
+                } else {
+                    tr += td + value + tds;
+                }
+                if (end == value) {
+                    for (let i = 0; i < 6 - lastDay.getDay(); i++) {
+                        tr += td[0];
+                    }
+                }//End Empty date bind 
+            }
+
+            cells++;
+            if (cells % weekLimit == 0) { tr += trs; }
+
+        });
+        tr += trs;
+
+        document.getElementById("TableCalender").innerHTML = tr;
+
+        let Mth = Month[m];
+        document.getElementById("Month").innerHTML = Mth;
+        document.getElementById("Year").innerHTML = y;
+    }
+
+</script>
