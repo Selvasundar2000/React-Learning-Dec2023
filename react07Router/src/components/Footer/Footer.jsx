@@ -35,18 +35,13 @@ export default function Footer() {
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Follow us</h2>
                             <ul className="text-gray-500 font-medium">
                                 <li className="mb-4">
-                                    <a
-                                        href="https://github.com/Selvasundar2000"
-                                        className="hover:underline"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        Github
-                                    </a>
+                                <Link to="/MockAPI" className="hover:underline">
+                                        MockAPI
+                                    </Link>
                                 </li>
                                 <li>
-                                    <Link to="/" className="hover:underline">
-                                        Discord
+                                    <Link to="/contact" className="hover:underline">
+                                        Contact
                                     </Link>
                                 </li>
                             </ul>
@@ -157,6 +152,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+            
         </footer>
     );
 }

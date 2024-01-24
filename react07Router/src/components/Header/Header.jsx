@@ -1,12 +1,14 @@
-import React from "react";
-import { Link,NavLink } from "react-router-dom";
-
+import React, { useState } from 'react';
+ import { Link, NavLink } from "react-router-dom";
 
 
 function Header() {
     return (
         <>
-            <header className="shadow sticky z-50 top-0">
+
+
+
+            {/* <header className="shadow sticky z-50 top-0">
                 <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         <Link to='/' className="flex items-center" >
@@ -67,13 +69,13 @@ function Header() {
                             </li>
                             <li>
                                 <NavLink
-                                to="/github"
+                                to="/MockAPI"
                                     className={({isActive}) =>
                                         `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
                                         ${isActive ? "text-indigo-700" : "text-gray-700" } lg:hover:bg-transparent lg:border-0 hover:text-indigo-700 lg:p-0`
                                     }
                                 >
-                                    Github
+                                    MockAPI
                                 </NavLink>
                             </li>
                             <li>
@@ -95,11 +97,31 @@ function Header() {
                     </div>
                 </nav>
 
-            </header>
+            </header> 
+ */}
+ <header className="shadow sticky z-50 top-0 bg-white">
+               
+                   
+                    
+<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+<img src="../public/Images/company_logo.jpg" alt="Logo" 
+                            className="mr-5 h-20"/>
+     <div class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+       <NavLink  to='/' className="mr-5">Home</NavLink>
+       <NavLink to='/MockAPI' className="mr-5">Mock API</NavLink>
+       <NavLink to='/contact' className="mr-5">Contact</NavLink>
+       <NavLink to='/user' className="mr-5">User</NavLink>
+       <NavLink to='/about' className="mr-5">About</NavLink>
+       
+     </div>
+     <button class="inline-flex items-center text-white bg-indigo-500 border-0 py-1 px-3 mt-4 md:mt-0">Get Started</button>
+  </div>
+       </header>    
+        </>
 
 
-            </>
     )
 }
 
 export default Header;
+
