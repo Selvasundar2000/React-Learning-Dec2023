@@ -9,7 +9,7 @@ export default function Footer() {
                     <div className="mb-6 md:mb-0">
                         <Link to="/" className="flex items-center">
                             <img
-                                src="../public/Images/company_logo.jpg"
+                                src="https://pharmaoffer.com/media/cache/clr/upload/logo/demo-supplier-company-6849.webp?version=20232711"
                                 className="mr-3 h-16"
                                 alt="Logo"
                             />

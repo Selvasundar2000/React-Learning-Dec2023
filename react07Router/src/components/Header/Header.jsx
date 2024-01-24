@@ -104,7 +104,7 @@ function Header() {
                    
                     
 <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-<img src="../public/Images/company_logo.jpg" alt="Logo" 
+<img src="https://pharmaoffer.com/media/cache/clr/upload/logo/demo-supplier-company-6849.webp?version=20232711" alt="Logo" 
                             className="mr-5 h-20"/>
      <div class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
        <NavLink  to='/' className="mr-5">Home</NavLink>
