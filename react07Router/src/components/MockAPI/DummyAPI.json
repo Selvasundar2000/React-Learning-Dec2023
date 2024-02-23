@@ -1,0 +1,81 @@
+[
+    
+      {
+        "id": 1,
+        "Name": "selva",
+        "Role":"Developer",
+        "Location":"Bengalore"
+       },
+       {
+        "id": 2,
+        "Name": "sundar",
+        "Role":"Developer",
+        "Location":"Chennai"
+      
+       },
+       {
+        "id": 3,       
+        "Name": "Sudalai",
+        "Role":"Testing",
+        "Location":"Pune"
+       
+       },
+       {
+        "id": 4,
+      
+        "Name": "Bala",
+        "Role":"Cyber Security",
+        "Location":"Chennai"
+       
+       },
+       {
+        "id": 5,
+      
+        "Name": "Muthu krishnan",
+        "Role":"Digital marketing",
+        "Location":"Hyderabad"
+        
+       },
+       {
+        "id": 6,
+      
+        "Name": "Stephen",
+        "Role":"Content writer",
+        "Location":"Coimbatore"
+      
+       },
+       {
+        "id": 7,
+      
+        "Name": "Santhosh",
+        "Role":"Senior Developer",
+        "Location":"Chennai"
+      
+       },
+       {
+        "id": 8,
+      
+        "Name": "Sri Rama",
+        "Role":"Data analyst",
+        "Location":"Madurai"
+      
+       },
+       {
+        "id": 9,
+      
+        "Name": "Pream kumar",
+        "Role":"Associate developer",
+        "Location":"Coimbatore"
+      
+       },
+       {
+        "id": 10,
+      
+        "Name": "Hari",
+        "Role":"Human Resource",
+        "Location":"Chennai"
+      
+       }
+
+    
+    ]
