@@ -1,19 +1,50 @@
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="utf-8">
+    <title>Calendar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <style>
-        .groove {border-style: groove;}
+        table td:hover {
+            background-color: rgba(0,0,0,.075);
+        }
     </style>
 </head>
-<body>
-    <div style="margin: 200px;">
-        <div id="Month"></div>
-        <div id="Year"></div>
-        <button id="btnBackward" onclick="AddDate('Prev');"><</button>
-        <button id="btnForward" onclick="AddDate('Next');">></button>
-        <table id="TableCalender" style="border: 1px solid;" class="groove">
-        </table>
-
+<body class="m-2">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="container-fluid ">
+                    <div class="container pt-5">
+                        <div class="d-flex  align-items-center justify-content-center ">
+                            <div class="table-responsive table-body text-center ">
+                                <div class="d-flex h-100 ">
+                                    <button id="btnBackward" onclick="AddDate('Prev');" type="button" class="btn btn-danger btn-arrow-left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown">
+                                        <select name="Month" id="Month" onchange="calmonthclick();" class="btn btn-secondary dropdown-toggle m-1">
+                                        </select>
+                                    </div>
+                                    <select class="btn btn-primary  dropdown-toggle  m-1" name="Year" id="Year" onchange="calyearclick();">
+                                    </select>
+                                    <button id="btnForward" onclick="AddDate('Next')" type="button" class="btn btn-danger btn-arrow-left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <table id="TableCalender" class="table shadow-lg p-3  mt-3 mb-5 bg-body border border-3 rounded "></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
@@ -23,47 +54,70 @@
 <script>
     var btnForward = document.getElementById("btnForward");
     var btnBackward = document.getElementById("btnBackward");
-
-    var value,a,b;
+    var value, a, b;
+    let IndxYr = '';
     function startOfMonth(date) {
         return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     }
+    var date = [];
+    date = new Date();
+    var DynamicYr = date.getFullYear();
+    var startYr = DynamicYr - 30;
+    var endYr = DynamicYr + 30;
+    var WholeYear = [];
 
-    //var dt = new Date();
+    function BtwYears(startYr, endYr) {
+        return Array.from({ length: endYr - startYr + 1 },
+            (_, index) => startYr + index);
+    }
+    WholeYear = BtwYears(startYr, endYr);
+
     var DayName = [];
     DayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     var Month = [];
     Month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let arr = [], result = [];
-    let Increase = [0];
+    let Incr = [0];
+    let Cyr = [];
 
+    Cyr = date.getFullYear()
     AddDate('');
 
-    function AddDate(x) {
 
+    function AddDate(x, y) {
         var date = [];
         date = new Date();
-
         var CurrentDate = new Date().getDate();
         var CurrentMonth = new Date().getMonth();
+
         var CurrentYear = new Date().getFullYear();
 
         //---------
-        value = parseInt(Increase, 0);
+        value = parseInt(Incr, 0);
         value = isNaN(value) ? 1 : value;
-
         if (x == 'Prev') {
             value--;
         } else if (x == 'Next') {
             value++;
         }
+        else if (x || y != '') {
+            Cyr = Cyr;
+        }
+        else {
+            value = value;
+            console.log(value);
+        }
+        Incr = value;
 
-        Increase = value;
-        var Cyr = date.getFullYear();//Current Year        
-        date.setFullYear(Cyr, Increase, 1);
+        //  Cyr = date.getFullYear();//Current Year 
+        console.log(Cyr);
+        date.setFullYear(Cyr, Incr, 1);
         //----------
         var y = date.getFullYear();
+
         var m = date.getMonth();
+
+
         var start = 1;
         var Fstart = startOfMonth(date).toString();// Start day of the month     
         var end = new Date(y, m + 1, 0).getDate();
@@ -74,25 +128,21 @@
                 (_, index) => start + index);
         }
         var DayNum = BtwDays(start, end);
-        var tr = "<tr>";
+        var tr = "<tr >";
         var trs = "</tr>";
         var td = [];
         var ctd = [];
-        ctd = ["<td style='border: 1px solid;' bgcolor='yellow'>"];
-        td = ["<td style='border: 1px solid'>"];
+        ctd = ["<td class='p-3 mb-2 bg-danger text-white rounded-3'>"];
+        td = ["<td>"];
         var tds = "</td>";
-        var th = "<th style='border: 1px solid'>";
+        var th = "<th scope='row'>";
         var ths = "</th>";
-
         var weekLimit = 7, cells = 0;
         DayName.forEach((value) => {
             tr += th + value + ths;//--->Weekdays bind
             cells++;
-
         });
         tr += trs;
-
-
         DayNum.forEach((value) => {
 
             if (value == 1) {
@@ -118,15 +168,54 @@
 
             cells++;
             if (cells % weekLimit == 0) { tr += trs; }
-
         });
         tr += trs;
-
         document.getElementById("TableCalender").innerHTML = tr;
+        let Monthoption = '';
+        for (let i = 0; i < Month.length; i++) {
+            Monthoption += '<option class="btn btn-light" value="' + Month[i] + '">' + Month[i] + '</option>';
+        }
 
-        let Mth = Month[m];
-        document.getElementById("Month").innerHTML = Mth;
-        document.getElementById("Year").innerHTML = y;
+        document.getElementById("Month").innerHTML = Monthoption;
+
+        document.getElementById("Month").selectedIndex = m;
+        // document.getElementById("Year").innerHTML = y;
+
+
+
+
+        let Yearoption = '';
+        for (let i = 0; i < WholeYear.length; i++) {
+            Yearoption += '<option class="btn btn-light" value="' + WholeYear[i] + '">' + WholeYear[i] + '</option>';
+
+        }
+
+        document.getElementById("Year").innerHTML = Yearoption;
+        IndxYr = WholeYear.indexOf(y);
+        document.getElementById("Year").selectedIndex = IndxYr;
+
     }
+
+
+    function calmonthclick() {
+        var drpVal = document.getElementById("Month").value;
+        var IdxMonth = Month.indexOf(drpVal);
+        Incr = [IdxMonth];
+
+        AddDate(Incr);
+
+
+    }
+
+    function calyearclick() {
+
+        var drpValYear = document.getElementById("Year").value;
+        Cyr = [drpValYear];
+        let tmp = '';
+        AddDate(tmp, Cyr);
+
+    }
+
+
 
 </script>
